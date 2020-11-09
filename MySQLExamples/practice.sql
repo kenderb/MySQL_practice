@@ -26,4 +26,16 @@ RENAME TABLE co_employees TO employees;
 ALTER TABLE employees DROP COLUMN age, 
 ADD COLUMN salary FLOAT NOT NULL AFTER contact_number, 
 ADD COLUMN years_in_company INT NOT NULL AFTER salary;
-DESCRIBE employees;
+
+
+ALTER TABLE employees 
+ADD COLUMN contact_number VARCHAR(255) AFTER gender;
+
+ALTER TABLE mentorships DROP FOREIGN KEY fk2;
+
+ALTER TABLE mentorships
+	ADD CONSTRAINT fk2 FOREIGN KEY(mentee_id) REFERENCES
+employees(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	DROP INDEX mm_constraint;
+
+DESCRIBE mentorships;
